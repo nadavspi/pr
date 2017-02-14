@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function fn_count {
-  echo "There are $(wc -l queue.txt | awk '{ printf $1 }') in line"
+  echo "There are $(wc -l queue.txt | awk '{ printf $1 }') in line."
 }
 
 function fn_open {
@@ -9,7 +9,7 @@ function fn_open {
 }
 
 function fn_add {
-  for link in "${@:2}"; do
+  for link in "${@:1}"; do
     echo "$link" >> queue.txt
   done
   echo -n "Added. "
@@ -22,9 +22,15 @@ function fn_done {
   fn_count
 }
 
+function fn_show {
+  cat queue.txt
+  echo " "
+  fn_count
+}
+
 if [ -z "$1" ]
 then
-  fn_open
+  fn_show
   exit 1
 fi
 
